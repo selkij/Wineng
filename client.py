@@ -1,6 +1,7 @@
 import socket
 from colorama import init, Fore, Style
 
+#TODO: Graphic client(optional)
 init(convert=True)
 
 try:
@@ -11,7 +12,7 @@ try:
     socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     socket.connect((host, port))
 
-    print("[INFO] Connected as "+ Fore.GREEN +name+ Style.RESET_ALL)
+    print(Fore.CYAN + "[INFO]"+Style.RESET_ALL+" Connected as "+ Fore.GREEN +name+ Style.RESET_ALL)
     name = name.encode('utf8')
     socket.sendall(name)
 
@@ -22,16 +23,17 @@ try:
             if data == " ":
                 pass
             else:
+                #TODO: Permettre de recevoir les données pour pouvoir communiquer entre clients
                 data = "("+str(name.decode())+"): " + data
                 data = data.encode('utf8')
                 socket.sendall(data) 
         except ConnectionResetError:
-            print("[ERROR] Connection reset. Is the server online?")
+            print(Fore.RED + "[ERROR] Connection reset. Is the server online?")
             break     
 except ConnectionRefusedError:
-    print(Fore.RED + "[ERROR] Connexion refused.")
+    print(Fore.RED + "[ERROR] Connexion refused")
 except ConnectionError:
-    print(Fore.RED + "[Error] An error occured.")
+    print(Fore.RED + "[Error] An error occured")
 except ConnectionResetError:
     print(Fore.RED + "[ERROR] Connection reset. Is the server online?")
 except KeyboardInterrupt:
