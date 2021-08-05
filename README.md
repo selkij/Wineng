@@ -1,2 +1,2 @@
 # Wineng
-Wineng is an Open Source chat 
+Wineng is an Open Source TCP chat very user friendly
